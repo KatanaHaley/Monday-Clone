@@ -9,8 +9,8 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-const url = 'https://a01c2c92-5871-47e7-8086-83719773b50c-us-east1.apps.astra.datastax.com/api/rest/v2/namespaces/tickets/collections/tasks'
-const token = 'AstraCS:CHdkJIgLiplOCUYxMvNcFLdb:37c561b9895ff10011442a8850be38d3fe1030f6d1a8f30a43f9c543125bfb56'
+const url = process.env.URL
+const token = process.env.ASTRA_TOKEN
 
 app.listen(PORT, () => console.log('server running on PORT ' + PORT))
 
