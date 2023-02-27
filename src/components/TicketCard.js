@@ -16,8 +16,8 @@ function TicketCard({ color, ticket}) {
         <StatusDisplay status={ticket.status} />
         <PriorityDisplay priority={ticket.priority}/>
         <ProgressDisplay progress={ticket.progress} />
-        <DeleteBlock />
       </Link>
+      <DeleteBlock documentId={ticket.documentId}/>
     </div>
   )
 }
