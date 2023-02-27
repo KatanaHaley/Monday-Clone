@@ -14,6 +14,25 @@ const token = 'AstraCS:CHdkJIgLiplOCUYxMvNcFLdb:37c561b9895ff10011442a8850be38d3
 
 app.listen(PORT, () => console.log('server running on PORT ' + PORT))
 
+app.get('/tickets', async (req, res) => {
+    const options = {
+        method: 'GET',
+        headers: {
+            Accepts: 'application/json',
+            'X-Cassandra-Token': token
+        }
+    }
+    try {
+        const response = await axios(`${url}?page-size=20`, options)
+        res.status(200).json(response.data)
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({message: err})
+    }
+})
+
+
+
 app.post('/tickets', async(req, res) =>{
     const formData = req.body.formData
 
@@ -28,33 +47,9 @@ app.post('/tickets', async(req, res) =>{
     }
     try {
         const response = await axios(url, options)
-        res.statusCode(200).json(res.data)
+        res.status(200).json(response.data)
     } catch(err) {
         console.log(err)
-        req.status(500).json({message: err})
+        res.status(500).json({message: err})
     }
 })
-
-// app.get('/example/b', (req, res, next) => {
-//     console.log('the response will be sent by the next function ...')
-//     next()
-//   }, (req, res) => {
-//     res.send('Hello from B!')
-//   })
-
-// const cb0 = function (req, res, next) {
-//     console.log('CB0')
-//     next()
-//   }
-  
-//   const cb1 = function (req, res, next) {
-//     console.log('CB1')
-//     next()
-//   }
-  
-//   const cb2 = function (req, res) {
-//     res.send('Hello from C!')
-//   }
-  
-//   app.get('/example/c', [cb0, cb1, cb2])
-  
